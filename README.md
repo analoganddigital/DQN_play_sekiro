@@ -6,6 +6,10 @@ As is known to all , Supervised learning can only learn skills from the data we 
 
 Reinforcement Learning can update its network by itself , using the reward feedback , which means we no longer need to collect our own data sets this time . All the data sets come from the real-time interaction between DQN network and the game.
 By using this DQN network , you can fight any boss you want in the game .
+There still something you need to know ：
+* In order to shorten the time of restart the game , we need game modifier .
+* The link for game modifier : https://patch.ali213.net/showpatch/118405.html
+* See the tutorial video for specific code usage , link : 
 
 Have fun !
 
@@ -21,6 +25,7 @@ There still something you need to konw:
 * I finally collected 300M training data , if you want better result , maybe you need to collect more data .
 * I use Alexnet to finish the training . This program is depend on Supervised learning.
 * I have no idea about using Reinforcement learning yet , so I will really appreciate it if someone can help me to overcome this difficulty.(already finished)
+* See the tutorial video for specific code usage , link : https://www.bilibili.com/video/BV1bz4y1R7kB
 
 
 # 更新——强化学习DQN打只狼     2021.2.2（中文说明）
@@ -29,6 +34,10 @@ There still something you need to konw:
 
 强化学习会根据reward奖励进行判断并且自己学习一种打斗方法。更重要的是，我们这次不再需要自己收集数据集了，所有更新数据均来自于DQN网络与游戏的实时交互。
 利用这个DQN代码（链接见下方），你可以挑战只狼中任何一个boss，只要boss的血条位置不变即可（因为我采用的是图像抓取的方式获取只狼的血量与boss的血量进行reward判断）。
+然后还有一些注意事项：
+* 为了缩短只狼复活周期，在这个项目训练中，我们需要采用只狼的24项修改器，让只狼能够原地复活继续训练。
+* 修改器下载地址：https://patch.ali213.net/showpatch/118405.html
+* 具体代码使用方法请见我在b站上发布的DQN打只狼的教程视频，链接：
 
 祝各位玩得愉快！
 
@@ -44,4 +53,5 @@ There still something you need to konw:
 * 我最终只收集了300M的数据，如果你想训练效果更好的话，可能要收集更多。
 * 我用的神经网络是Alexnet，基于监督学习完成的。
 * 由于我能力有限，我还没想好如何用强化学习优化算法，所以如果有大佬能分享一下自己的才华，那将十分感谢。（目前已经实现）
+* 具体代码使用方法请见我在b站上发布的机器学习打只狼的教程视频，链接： https://www.bilibili.com/video/BV1bz4y1R7kB
 
