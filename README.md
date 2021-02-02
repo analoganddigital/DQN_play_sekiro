@@ -9,7 +9,7 @@ By using this DQN network , you can fight any boss you want in the game .
 There still something you need to know ：
 * In order to shorten the time of restart the game , we need game modifier .
 * The link for game modifier : https://patch.ali213.net/showpatch/118405.html
-* See the tutorial video for specific code usage , link : 
+* See the tutorial video for specific code usage , link : https://www.bilibili.com/video/BV1by4y1n7pe/
 
 Have fun !
 
@@ -37,7 +37,7 @@ There still something you need to konw:
 然后还有一些注意事项：
 * 为了缩短只狼复活周期，在这个项目训练中，我们需要采用只狼的24项修改器，让只狼能够原地复活继续训练。
 * 修改器下载地址：https://patch.ali213.net/showpatch/118405.html
-* 具体代码使用方法请见我在b站上发布的DQN打只狼的教程视频，链接：
+* 具体代码使用方法请见我在b站上发布的DQN打只狼的教程视频，链接：https://www.bilibili.com/video/BV1by4y1n7pe/
 
 祝各位玩得愉快！
 
