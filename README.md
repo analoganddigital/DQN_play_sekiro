@@ -27,6 +27,9 @@ There still something you need to konw:
 * I have no idea about using Reinforcement learning yet , so I will really appreciate it if someone can help me to overcome this difficulty.(already finished)
 * See the tutorial video for specific code usage , link : https://www.bilibili.com/video/BV1bz4y1R7kB
 
+Reference ：
+https://github.com/Sentdex/pygta5/blob/master/LICENSE
+
 
 # 更新——强化学习DQN打只狼     2021.2.2（中文说明）
 我非常高兴地告诉大家，我最近又开发出了用DQN强化学习打只狼的代码。
@@ -55,3 +58,5 @@ There still something you need to konw:
 * 由于我能力有限，我还没想好如何用强化学习优化算法，所以如果有大佬能分享一下自己的才华，那将十分感谢。（目前已经实现）
 * 具体代码使用方法请见我在b站上发布的机器学习打只狼的教程视频，链接： https://www.bilibili.com/video/BV1bz4y1R7kB
 
+部分参考代码：
+https://github.com/Sentdex/pygta5/blob/master/LICENSE
