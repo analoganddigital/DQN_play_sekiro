@@ -7,6 +7,7 @@ Created on Wed Jan 27 21:10:06 2021
 
 import numpy as np
 from grabscreen import grab_screen
+from PIL import ImageGrab
 import cv2
 import time
 import directkeys
@@ -26,6 +27,8 @@ def pause_game(paused):
             paused = False
             print('start game')
             time.sleep(1)
+            print("锁定视角")
+            directkeys.lock_vision()
         else:
             paused = True
             print('pause game')
@@ -40,29 +43,13 @@ def pause_game(paused):
                     paused = False
                     print('start game')
                     time.sleep(1)
+                    print("锁定视角")
+                    directkeys.lock_vision()
                     break
                 else:
                     paused = True
                     time.sleep(1)
     return paused
-
-def self_blood_count(self_gray):
-    self_blood = 0
-    for self_bd_num in self_gray[469]:
-        # self blood gray pixel 80~98
-        # 血量灰度值80~98
-        if self_bd_num > 90 and self_bd_num < 98:
-            self_blood += 1
-    return self_blood
-
-def boss_blood_count(boss_gray):
-    boss_blood = 0
-    for boss_bd_num in boss_gray[0]:
-    # boss blood gray pixel 65~75
-    # 血量灰度值65~75 
-        if boss_bd_num > 65 and boss_bd_num < 75:
-            boss_blood += 1
-    return boss_blood
 
 def take_action(action):
     if action == 0:     # n_choose
@@ -133,11 +120,8 @@ DQN_model_path = "model_gpu"
 DQN_log_path = "logs_gpu/"
 WIDTH = 96
 HEIGHT = 88
-window_size = (320,100,704,452)#384,352  192,176 96,88 48,44 24,22
+#window_size = (320,100,704,452)#384,352  192,176 96,88 48,44 24,22
 # station window_size
-
-blood_window = (60,91,280,562)
-# used to get boss and self blood
 
 action_size = 5
 # action[n_choose,j,k,m,r]
@@ -153,6 +137,7 @@ target_step = 0
 # used to update target Q network
 paused = True
 # used to stop training
+#directkeys.Cheat()
 
 if __name__ == '__main__':
     agent = DQN(WIDTH, HEIGHT, action_size, DQN_model_path, DQN_log_path)
@@ -163,14 +148,14 @@ if __name__ == '__main__':
     # emergence_break is used to break down training
     # 用于防止出现意外紧急停止训练防止错误训练数据扰乱神经网络
     for episode in range(EPISODES):
-        screen_gray = cv2.cvtColor(grab_screen(window_size),cv2.COLOR_BGR2GRAY)
+        screen_gray = cv2.cvtColor(grab_screen(directkeys.window_size),cv2.COLOR_BGR2GRAY)
         # collect station gray graph
-        blood_window_gray = cv2.cvtColor(grab_screen(blood_window),cv2.COLOR_BGR2GRAY)
+        blood_window_gray = np.array(ImageGrab.grab(bbox=(directkeys.blood_window)))
         # collect blood gray graph for count self and boss blood
         station = cv2.resize(screen_gray,(WIDTH,HEIGHT))
         # change graph to WIDTH * HEIGHT for station input
-        boss_blood = boss_blood_count(blood_window_gray)
-        self_blood = self_blood_count(blood_window_gray)
+        boss_blood = directkeys.boss_blood_count(blood_window_gray)
+        self_blood = directkeys.self_blood_count(blood_window_gray)
         # count init blood
         target_step = 0
         # used to update target Q network
@@ -189,14 +174,14 @@ if __name__ == '__main__':
             action = agent.Choose_Action(station)
             take_action(action)
             # take station then the station change
-            screen_gray = cv2.cvtColor(grab_screen(window_size),cv2.COLOR_BGR2GRAY)
+            screen_gray = cv2.cvtColor(grab_screen(directkeys.window_size),cv2.COLOR_BGR2GRAY)
             # collect station gray graph
-            blood_window_gray = cv2.cvtColor(grab_screen(blood_window),cv2.COLOR_BGR2GRAY)
+            blood_window_gray = np.array(ImageGrab.grab(bbox=(directkeys.blood_window)))
             # collect blood gray graph for count self and boss blood
             next_station = cv2.resize(screen_gray,(WIDTH,HEIGHT))
             next_station = np.array(next_station).reshape(-1,HEIGHT,WIDTH,1)[0]
-            next_boss_blood = boss_blood_count(blood_window_gray)
-            next_self_blood = self_blood_count(blood_window_gray)
+            next_boss_blood = directkeys.boss_blood_count(blood_window_gray)
+            next_self_blood = directkeys.self_blood_count(blood_window_gray)
             reward, done, stop, emergence_break = action_judge(boss_blood, next_boss_blood,
                                                                self_blood, next_self_blood,
                                                                stop, emergence_break)
